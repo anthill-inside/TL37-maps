@@ -26,26 +26,23 @@ public class AnagramAppl {
 
 	}
 
-	public static boolean isAnagram(String w1, String w2) {
-		if (w1 == null || w2 == null) return false;
+	public static boolean isAnagram(String w1, String w2){
+		if(w1==null||w2==null)return false;
 
-		Map<Character, Integer> w2Frequencies = new HashMap<>();
-		for (Character c : w2.toCharArray()) {
-			w2Frequencies.put(c, w2Frequencies.getOrDefault(c, 0) + 1);
+		Map<Character, Integer> w1Frequencies = new HashMap<>();
+		for (Character c : w1.toCharArray()) {
+			w1Frequencies.put(c, w1Frequencies.getOrDefault(c, 0) + 1);
 		}
 
 
-		for (Map.Entry<Character, Integer> e : w2Frequencies.entrySet()) {
-			if (!w1.contains(e.getKey().toString())) {
-				return false;
-			}
-			long inclusions1 = w1.chars().filter(c -> c==e.getKey()).count();
-			if (inclusions1 < e.getValue()) {
-				return false;
-			}
-
+		for(Character c :w2.toCharArray()){
+			w1Frequencies.put(c,w1Frequencies.getOrDefault(c,0)-1);
+			if(w1Frequencies.get(c)<0) return false;
 		}
-			return true;
+
+
+		return true;
+
 	}
-}
 
+}
